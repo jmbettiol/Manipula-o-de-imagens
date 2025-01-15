@@ -1,18 +1,12 @@
 % Carregue a imagem
 a = imread('Paranoico.png');
 % Verifique o seu tamanho
- size (a)
-ans =
-
-   900   900     3
+ size(a)
 
 % Carregue a imagem
 b = imread('Luz.jpg');
 % Verifique o seu tamanho
  size(b)
- ans =
-
-   900   900     3
 
  
  R1 = a(:, :, 1); % Canal vermelho da primeira imagem
