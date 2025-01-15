@@ -1,0 +1,15 @@
+ # Carregue a imagem original
+ c = imread('Almas.jpg');
+ # Normalizando a imagem
+ C = im2double(c);
+ # Separe os canais de cor
+ R = c(:,:,1); # Canal Vermelho
+ G = c(:,:,2); # Canal Verde
+ B = c(:,:,3); # Canal Azul
+ # Inverter os canais de cores 
+ R_complementar = 1 - R; 
+ G_complementar = 1 - G; 
+ B_complementar = 1 - B;
+ # Concatenar os canais de cores invertidos
+ imagem_complementar = cat(3, R_complementar, G_complementar, B_complementar);
+ imshow(imagem_complementar)
