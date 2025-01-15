@@ -1,5 +1,5 @@
 % Carregue a imagem
-a = imread('Paranoico.jpg');
+a = imread('Paranoico.png');
 % Verifique o seu tamanho
  size (a)
 ans =
@@ -25,7 +25,7 @@ b = imread('Luz.jpg');
 
 
  % Converter valores inteiros dos pixels para evitar perdas por truncamento
- % Multiplicar as imagens por canais de cores
+ % Multiplicar as imagens por canais de cores para A = a × b
  A1_double = double(R1) * double(R2);
  A2_double = double(G1) * double(G2);
  A3_double = double(B1) * double(B2);
@@ -40,14 +40,12 @@ b = imread('Luz.jpg');
  A2 = uint8(A2_double);
  A3 = uint8(A3_double);
 
- % Concatenar canais e exibir imagem
+ % Concatenar canais de A
  A = cat(3, A1, A2, A3);
- imshow(A)
-
-
+ 
 
  % Converter valores inteiros dos pixels para evitar perdas por truncamento
- % Multiplicar as imagens por canais de cores
+ % Multiplicar as imagens por canais de cores para B = b × a
  B1_double = double(R2) * double(R1);
  B2_double = double(G2) * double(G1);
  B3_double = double(B2) * double(B1);
@@ -62,6 +60,24 @@ b = imread('Luz.jpg');
  B2 = uint8(B2_double);
  B3 = uint8(B3_double);
 
- % Concatenar canais e exibir imagem
+ % Concatenar canais de B
  B = cat(3, B1, B2, B3);
- imshow(B)
+ 
+% Plotar as 4 imagens em uma única figura com 2 linhas e 2 colunas
+figure;
+
+subplot(2, 2, 1); % Primeira posição (linha 1, coluna 1)
+imshow(a);
+title('Imagem a');
+
+subplot(2, 2, 2); % Segunda posição (linha 1, coluna 2)
+imshow(b);
+title('Imagem b');
+
+subplot(2, 2, 3); % Terceira posição (linha 2, coluna 1)
+imshow(A);
+title('A = a × b');
+
+subplot(2, 2, 4); % Quarta posição (linha 2, coluna 2)
+imshow(B);
+title('B = b × a');
