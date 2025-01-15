@@ -1,0 +1,24 @@
+ # Carregue a imagem
+ a = imread('A Louva-a-Deus 3000x3000.jpg');
+ # Verifique o tamanho da imagem
+ size(a)
+ans =
+   3000   3000      3
+ # Zerando as linhas 1001 a 2000 e as colunas 1001 a 2000
+ # zerando as linhas
+ a(1001:2000, :, 1) = 0;
+ a(1001:2000, :, 2) = 0;
+ a(1001:2000, :, 3) = 0;
+ # zerando as colunas
+ a(:, 1001:2000, 1) = 0;
+ a(:, 1001:2000, 2) = 0;
+ a(:, 1001:2000, 3) = 0;
+
+ # exibindo a nova imagem (a)
+ imshow(a)
+
+ # Agora, alocamos na variável b a imagem original
+ b = imread('A Louva-a-Deus 3000x3000.jpg');
+ # Subtração de (b) por (a)
+ A = b-a;
+ imshow(A)  # Exibe a nova imagem
