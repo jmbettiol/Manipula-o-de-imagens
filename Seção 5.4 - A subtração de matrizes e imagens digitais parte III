@@ -1,0 +1,27 @@
+ # Carregar a imagem
+ t = imread('reencontro com o ludico-3000x3000-2023.jpg');
+ # Verificar o tamanho da imagem
+ size(t)
+ans =
+   3000   3000     3
+ # Definir o tamanho da imagem
+ tamanho_imagem = 3000;
+ # Definir raio da circunferência
+ raio = 1000;
+ # Gerar coordenadas x e y
+ [x, y] = meshgrid(1:tamanho_imagem, 1:tamanho_imagem);
+ # Calcular distância de cada ponto ao centro
+ circunferencia = (x - tamanho_imagem/2).^2 + (y - tamanho_imagem/2).^2 - raio^2;
+ # Zerar os pixels dentro do raio para cada canal de cor
+ imagem = t;
+ for canal = 1:3
+    canal_cor = t(:,:,canal);
+    canal_cor(circunferencia <= 0) = 0;
+    imagem(:,:,canal) = canal_cor;
+end
+ # Exibir a imagem
+ imshow(imagem);
+ Realize a subtração de (t) por (imagem)
+ V = t-(imagem);
+ Exiba a nova imagem
+ imshow(V)
