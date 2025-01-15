@@ -1,0 +1,30 @@
+ % CISALHAMENTO HORIZONTAL H1
+ % Carregar a imagem
+ imagem = imread('Cranio 1.jpg');
+ % Obter as dimensões da imagem original
+ [altura, largura, canais] = size(imagem);
+ % Definir o ângulo de cisalhamento em radianos
+ theta = pi/4; % 45 graus
+ % Calcular o fator de cisalhamento horizontal (pode ser negativo)
+ a = (cos(theta) - 1) / sin(theta);
+ % Calcular a nova largura da imagem após o cisalhamento
+ nova_largura = round(largura + abs(a) * altura);
+ % Criar uma nova matriz de zeros para a imagem cisalhada, com o novo tamanho
+ H1 = zeros(altura, nova_largura, canais, 'uint8');
+ % Aplicar o cisalhamento horizontal para a esquerda
+ for c = 1:canais
+    for i = 1:altura
+        for j = 1:largura
+            % Calcular a nova posição do pixel após o cisalhamento
+            novo_j = round(j - a * i);
+            % Verificar se a nova posição está dentro dos limites da nova matriz
+            if novo_j > 0 && novo_j <= nova_largura
+                H1(i, novo_j, c) = imagem(i, j, c);
+            end
+        end
+    end
+end
+ % Exibir a imagem resultante
+ imshow(H1);
+ % Salvar a imagem cisalhada
+ imwrite(H1, 'imagem_cisalhada_horizontal_ajustada.png');
