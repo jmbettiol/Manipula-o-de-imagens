@@ -1,0 +1,32 @@
+ % CISALHAMENTO VERTICAL V
+ % Carregar a imagem
+ imagem = imread('imagem_cisalhada_horizontal_ajustada.png');
+ % Obter as dimensões da imagem original
+ [altura, largura, canais] = size(imagem);
+ % Definir o ângulo de cisalhamento em radianos
+ theta = pi/4; % 45 graus
+ % Calcular o fator de cisalhamento vertical
+ b = sin(theta);
+ % Calcular o novo tamanho da imagem para evitar corte
+ nova_altura = round(altura + abs(b) * largura);
+ % Criar uma nova matriz de zeros para a imagem cisalhada, com o novo tamanho
+ V = zeros(nova_altura, largura, canais, 'uint8');
+ % Calcular a posição inicial para inserir a imagem na nova matriz
+ inicio_y = round(abs(b) * largura);
+ % Aplicar o cisalhamento vertical
+ for c = 1:canais
+    for i = 1:altura
+        for j = 1:largura
+            % Calcular a nova posição do pixel após o cisalhamento
+            novo_i = round(i - b * j) + inicio_y;
+            % Verificar se a nova posição está dentro dos limites da nova matriz
+            if novo_i > 0 && novo_i <= nova_altura
+                V(novo_i, j, c) = imagem(i, j, c);
+            end
+        end
+    end
+end
+ % Exibir a imagem resultante
+ imshow(V);
+ % Salvar a imagem cisalhada
+ imwrite(V, 'imagem_cisalhada_vertical_ajustada.png');
