@@ -1,0 +1,21 @@
+ # Carregue a imagem
+ f = imread('Experiência (Kambô) 900x900 - 2020.png');
+ # Divida os canais pela metade e selecione a metade do lado esquerdo
+ R_F = f(:, 1:450, 1); # canal vermelho
+ G_F = f(:, 1:450, 2); # canal verde
+ B_F = f(:, 1:450, 3); # canal azul
+ # Junte os três canais
+ M_esq = cat(3, R_F, G_F, B_F);
+ imshow(M_esq)
+
+
+ # Divida os canais pela metade e selecione a metade do lado direito
+ R_F = f(:, 451:900, 1);
+ G_F = f(:, 451:900, 2);
+ B_F = f(:, 451:900, 3);
+ # Junte os três canais
+ M_dir = cat(3, R_F, G_F, B_F);
+ imshow(M_dir)
+
+ S = M_esq + M_dir;
+ imshow(S)
