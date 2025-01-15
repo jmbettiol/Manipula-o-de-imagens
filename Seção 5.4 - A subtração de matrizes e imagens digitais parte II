@@ -1,0 +1,20 @@
+ # Carregue a imagem
+ x = imread('Luz-900x900-2016.jpg');
+ size(a)
+ans =
+   900   900     3
+ #loop sobre as linhas
+ for i = 1:900
+#loop sobre as colunas
+   for j = i:900
+# Zerando os elementos acima da diagonal principal (R, G, B)
+   x(i, j, :) = 0;
+   end
+   end
+ # Agora, substitua o nome da imagem original de (x) por (y)
+ y = imread('Luz-900x900-2016.jpg');
+ # Realize a subtração de (y) por (x)
+Z = y-x;
+ Exiba a nova imagem
+ imshow(Z)
+
