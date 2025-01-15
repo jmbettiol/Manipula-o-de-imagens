@@ -1,0 +1,4 @@
+ # Carregue a imagem
+ a = imread('Faces - Internas ... - O - Suicida - O - Artista - e - o - Louco . jpg ');
+ # Aplicar reflexão matricial em torno do eixo x
+ imagem_refletida_x = a(end:-1:1, :, :);
