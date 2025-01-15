@@ -1,0 +1,42 @@
+ % Carregue a imagem
+ imagem = imread('O sopro - Retrato de Letícia.jpg');
+ % Verifique o seu tamanho
+ size(imagem)
+ans =
+   562   800     3
+ % Selecionar a região de interesse (linha 100 a 170 e coluna 100 a 150)
+ regiao = imagem(100:170, 100:150, :);
+ % Dimensões da região original
+ [m, n, canais] = size(regiao); 
+ % Criar a matriz de dilatação vertical B (dilatação vertical)
+ B = kron(eye(m), ones(4, 1));
+ % Criar a matriz de dilatação horizontal C (dilatação horizontal)
+ C = kron(eye(n), ones(1, 4));
+ % Aplicar a expansão para cada canal de cor
+ imagem_dilatada = zeros(4 * m, 4 * n, canais, 'uint8');
+ for i = 1:canais
+    % Convertendo a região para double para a multiplicação
+    imagem_temp = double(regiao(:,:,i));
+    % Aplicar a expansão
+    imagem_temp_exp = B * imagem_temp * C;
+    % Atribuir a imagem expandida ao canal correspondente
+    imagem_dilatada(:,:,i) = uint8(imagem_temp_exp);
+end
+ % Diferença de tamanho entre as duas imagens
+ size(regiao)
+ans =
+   71   51    3
+ size(imagem_dilatada)
+ans =
+   284   204     3
+% Salvar as imagens para verificar no visualizador externo
+imwrite(regiao, 'regiao_original.png');
+imwrite(imagem_dilatada, 'regiao_dilatada.png');
+ % Exibir a região original e a região expandida lado a lado
+ figure;
+ subplot(1, 2, 1);
+ imshow(regiao);
+ title('Região Original');
+ subplot(1, 2, 2);
+ imshow(imagem_dilatada);
+ title('Região dilatada 4x');
