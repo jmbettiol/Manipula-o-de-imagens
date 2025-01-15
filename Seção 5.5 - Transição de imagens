@@ -1,0 +1,27 @@
+ # Carregue as imagens.
+ A = imread('Diana morrendo 2004 900x600.jpg');
+ B = imread('Floresta 900x600.jpg');
+ function M = transicao(A, B, x)
+    M = (1 - x) * A + x * B;
+end
+# Verifique o tamanho das imagens 
+ size(A)
+ans =
+   600   900     3
+>> size(B)
+ans =
+   600   900     3
+ # Defina a função M.
+ function M = transicao(A, B, x)
+    M = (1 - x) * A + x * B;
+end
+ # parâmetro = 0
+ imshow(transicao(A,B,0))
+ # parâmetro = 0.25
+ imshow(transicao(A,B,0.25))
+ # parâmetro = 0.5
+ imshow(transicao(A,B,0.5))
+ # parâmetro = 0.75
+ imshow(transicao(A,B,0.75))
+ # parâmetro = 1
+ imshow(transicao(A,B,1))
