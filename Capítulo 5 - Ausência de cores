@@ -1,0 +1,21 @@
+ # Carregue a imagem original
+ d = imread('Animais.jpg');
+ # Remova o canal vermelho e crie a primeira imagem
+ img_sem_vermelho = d;
+ img_sem_vermelho(:,:,1) = 0;
+ # Remova o canal verde e crie a segunda imagem
+ img_sem_verde = d;
+ img_sem_verde(:,:,2) = 0;
+ # Remova o canal azul e crie a terceira imagem
+ img_sem_azul = d;
+ img_sem_azul(:,:,3) = 0;
+ # Exiba as três imagens
+ subplot(1,3,1);
+ imshow(img_sem_vermelho);
+ title('Sem Vermelho');
+ subplot(1,3,2);
+ imshow(img_sem_verde);
+ title('Sem Verde');
+ subplot(1,3,3);
+ imshow(img_sem_azul);
+ title('Sem Azul');
