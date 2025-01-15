@@ -1,0 +1,14 @@
+ # Carregue a imagem
+ b = imread('Faces-Internas...-O-Suicida-O-Artista-e-o-Louco.jpg');
+ # Separe os três canais
+ R = b(:, :, 1); # Canal vermelho
+ G = b(:, :, 2); # Canal verde
+ B = b(:, :, 3); # Canal azul
+ # Realize a transposição dos três canais de forma individual
+ R';
+ G';
+ B';
+ # Junte as três transposições
+ T = cat(3, R', G', B');
+ # Exiba a imagem
+ imshow(T)
