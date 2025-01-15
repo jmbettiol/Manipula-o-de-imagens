@@ -1,0 +1,67 @@
+% Carregue a imagem
+a = imread('Paranoico.jpg');
+% Verifique o seu tamanho
+ size (a)
+ans =
+
+   900   900     3
+
+% Carregue a imagem
+b = imread('Luz.jpg');
+% Verifique o seu tamanho
+ size(b)
+ ans =
+
+   900   900     3
+
+ 
+ R1 = a(:, :, 1); % Canal vermelho da primeira imagem
+ G1 = a(:, :, 2); % Canal verde da primeira imagem
+ B1 = a(:, :, 3); % Canal azul da primeira imagem
+
+ R2 = b(:, :, 1); % Canal vermelho da segunda imagem
+ G2 = b(:, :, 2); % Canal verde da segunda imagem
+ B2 = b(:, :, 3); % Canal azul da segunda imagem
+
+
+ % Converter valores inteiros dos pixels para evitar perdas por truncamento
+ % Multiplicar as imagens por canais de cores
+ A1_double = double(R1) * double(R2);
+ A2_double = double(G1) * double(G2);
+ A3_double = double(B1) * double(B2);
+
+ % (Normalização Linear) Normalizar valores para o intervalo [0, 1] e reescalonar para o intervalo [0, 255]
+ A1_double = A1_double / max(A1_double(:)) * 255;
+ A2_double = A2_double / max(A2_double(:)) * 255;
+ A3_double = A3_double / max(A3_double(:)) * 255;
+
+ % Truncar os valores decimais e clipar os valores fora do intervalo [0, 255]
+ A1 = uint8(A1_double);
+ A2 = uint8(A2_double);
+ A3 = uint8(A3_double);
+
+ % Concatenar canais e exibir imagem
+ A = cat(3, A1, A2, A3);
+ imshow(A)
+
+
+
+ % Converter valores inteiros dos pixels para evitar perdas por truncamento
+ % Multiplicar as imagens por canais de cores
+ B1_double = double(R2) * double(R1);
+ B2_double = double(G2) * double(G1);
+ B3_double = double(B2) * double(B1);
+
+ % (Normalização Linear) Normalizar valores para o intervalo [0, 1] e reescalonar para o intervalo [0, 255]
+ B1_double = B1_double / max(B1_double(:)) * 255;
+ B2_double = B2_double / max(B2_double(:)) * 255;
+ B3_double = B3_double / max(B3_double(:)) * 255;
+
+ % Truncar os valores decimais e clipar os valores fora do intervalo [0, 255]
+ B1 = uint8(B1_double);
+ B2 = uint8(B2_double);
+ B3 = uint8(B3_double);
+
+ % Concatenar canais e exibir imagem
+ B = cat(3, B1, B2, B3);
+ imshow(B)
