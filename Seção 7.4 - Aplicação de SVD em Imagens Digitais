@@ -1,0 +1,28 @@
+ % Carregar a imagem
+ imagem = imread('longas-objetos-deformados-bettiol-3.jpg');
+ % Converter para matrizes de canais de cor
+ R = double(imagem(:,:,1));
+ G = double(imagem(:,:,2));
+ B = double(imagem(:,:,3));
+ % Aplicar SVD a cada canal
+ [UR, SR, VR] = svd(R);
+ [UG, SG, VG] = svd(G);
+ [UB, SB, VB] = svd(B);
+ % Variável para o número de valores singulares a manter
+ r = 50; % Você pode ajustar para r = 1, r = 10, r = 25 e r = 100
+ % Reconstruir a imagem usando os primeiros r valores singulares
+ SR_r = SR;
+ SR_r(r+1:end, :) = 0;
+ SR_r(:, r+1:end) = 0;
+ SG_r = SG;
+ SG_r(r+1:end, :) = 0;
+ SG_r(:, r+1:end) = 0;
+ SB_r = SB;
+ SB_r(r+1:end, :) = 0;
+ SB_r(:, r+1:end) = 0;
+ R_approx = UR * SR_r * VR';
+ G_approx = UG * SG_r * VG';
+ B_approx = UB * SB_r * VB';
+ % Combinar os canais e mostrar a imagem reconstruída
+ imagem_reconstruida = cat(3, uint8(R_approx), uint8(G_approx), uint8(B_approx));
+ imshow(imagem_reconstruida);
